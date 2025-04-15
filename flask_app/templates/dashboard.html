@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex justify-content-between align-items-center">
+            <h1>¡Bienvenid@ {{user.first_name}} {{user.last_name}} !</h1>
+            <a href="/recipes/new" class="btn btn-success">Nueva Receta</a>
+            <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+        </header>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre de Receta</th>
+                    <th>¿Menos de 30 mins?</th>
+                    <th>Creador</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in recipes %}
+                    <tr>
+                        <td>{{recipe.name}}</td>
+                        <td>
+                            {% if recipe.under_30 == 0 %}
+                                No
+                            {% else %}
+                                Si
+                            {% endif %}
+                        </td>
+                        <td>{{recipe.first_name}}</td>
+                        <td>
+                            <a href="/recipes/show/{{recipe.id}}" class="btn btn-warning">Ver Receta</a>
+                            <!-- Editar y borrar solo para el creador de la receta-->
+                            {% if recipe.user_id == session['user_id'] %}
+                                <a href="/recipes/edit/{{recipe.id}}" class="btn btn-info">Editar Receta</a>
+                                <a href="/recipes/delete/{{recipe.id}}" class="btn btn-danger">Borrar Receta</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

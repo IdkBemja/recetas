@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Receta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex justify-content-between align-items-center">
+            <h1>Mostrar Receta</h1>
+            <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+            <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+        </header>
+        <div class="card">
+            <div class="card-header">
+                {{recipe.name}}
+            </div>
+            <div class="card-body">
+                <p>
+                    <b>Descripción:</b> {{recipe.description}}
+                </p>
+                <p>
+                    <b>Instrucciones:</b> {{recipe.instructions}}
+                </p>
+                <p>
+                    <b>¿Menos de 30 mins?</b> {% if recipe.under_30 == 1 %} Si {% else %} No {% endif %}
+                </p>
+                <p>
+                    <b>Fecha de creación:</b> {{recipe.date_made}}
+                </p>
+            </div>
+            <div class="card-footer">
+                Publicado por: {{recipe.first_name}}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
